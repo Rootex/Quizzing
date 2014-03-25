@@ -11,11 +11,11 @@ class Quiz:
 
     def __init__(self, path='./'):
         try:
-            with open(path + 'quiz_test.dat', 'r') as quiz_file:
+            with open(path + 'quiz_test_multi_choice.dat', 'r') as quiz_file:
                 quests = quiz_file.readlines()
                 self.quiz_list = [line.split(',') for line in quests]
         except IOError:
-            print "Cannot find quiz_test.dat in the given path!"
+            print "Cannot find quiz_test_multi_choice.dat in the given path!"
 
     def check(self):
         test = self.quiz_list[:]
