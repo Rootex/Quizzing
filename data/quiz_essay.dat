@@ -1,0 +1,6 @@
+What do you mean by the word Inheritance OOP?, "Inheritance in object oriented programming is when an object of a class
+gets some or all of its attributes from another class, this is usually achieved by a class extending another class
+usually called the parent class. This give the advantage of reuse" @
+What do you mean by the word Encapsulation in OOP?, "Encapsulation is the process of hiding information of a class
+usually by denoting it as private, when an attribute or method is denoted as private, it means that other classes cannot
+access those elements."
