@@ -2,6 +2,7 @@ __author__ = 'Sotaya'
 
 import os
 import random
+import text2speech
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'data/')
 
@@ -10,6 +11,7 @@ class MutiChoice:
     options = {0: "", 1: "A", 2: "B", 3: "C", 4: "D"}
 
     def __init__(self, path='./'):
+        self.talk = text2speech.Reader()
         try:
             with open(path + 'quiz_test_multi_choice.dat', 'r') as quiz_file:
                 quests = quiz_file.readlines()
@@ -25,15 +27,20 @@ class MutiChoice:
             answer = str(question[-1]).strip()
             for k, a in enumerate(question[:-1]):
                 print MutiChoice.options[k], a
+                self.talk.speak(MutiChoice.options[k])
+                self.talk.speak(a)
             user_answer = raw_input("Enter your answer: ")
             if answer == user_answer:
                 print "Correct answer"
+                self.talk.speak("Correct answer")
             else:
                 print "Wrong answer"
+                self.talk.speak("Wrong answer")
 
 
 class Essay:
     def __init__(self, path='./'):
+        self.talk = text2speech.Reader()
         try:
             with open(path + 'quiz_essay.dat', 'r') as quiz_file:
                 quests = quiz_file.read()
@@ -59,3 +66,7 @@ class Essay:
         except ValueError as e:
             print e.message
             raise ValueError()
+
+if __name__ == '__main__':
+    obj = MutiChoice(DATA_PATH)
+    obj.check()
