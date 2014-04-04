@@ -3,12 +3,14 @@ __author__ = 'Sotaya'
 import os
 import random
 import text2speech
+import json
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'data/')
 
 
 class MutiChoice:
     options = {0: "", 1: "A", 2: "B", 3: "C", 4: "D"}
+    stats = {"questions_answered": 0, "correct_answer": 0}
 
     def __init__(self, path='./'):
         self.talk = text2speech.Reader()
@@ -33,9 +35,16 @@ class MutiChoice:
             if answer == user_answer:
                 print "Correct answer"
                 self.talk.speak("Correct answer")
+                self.stats["questions_answered"] += 1
+                self.stats["correct_answer"] += 1
+            elif user_answer == "":
+                pass
             else:
                 print "Wrong answer"
                 self.talk.speak("Wrong answer")
+                self.stats["questions_answered"] += 1
+        with open(DATA_PATH+'stats.json', 'a') as f:
+            json.dump(self.stats, f)
 
 
 class Essay:
